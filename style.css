@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #262626;
+}
+
+.images {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* img zoom-in effect */
+
+.img-zoom {
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.img-zoom img {
+    transition: transform .5s ease;
+}
+
+.img-zoom:hover img {
+    transform: scale(1.2);
+}
+
+/* responsiveness */
+@media (max-width: 525px) {
+    
+}
+
+
+
+
+/* h1 */
+
+header {
+    display: inline-block;
+} 
+
+h1 {
+    background: linear-gradient(to right,#ff4e50
+    , #f1cc11);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    
+    /* animation */
+    /* display: inline-block; */
+    width: 0;
+    letter-spacing: .15em;
+    white-space: nowrap;
+    margin: 0 auto; 
+    overflow: hidden;
+    animation: 
+        typing 2s forwards, 
+        blink-caret 1s step-end infinite;
+}
+
+/* typing effect */
+@keyframes typing {
+    from { width: 0; } 
+    to { width: 100%; } 
+}
+ 
+/* big img */
+
+#bigImg {
+    display: none; /*not to be shown once the site is opened */
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+i {
+    color: white;
+}
+
