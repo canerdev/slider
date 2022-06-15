@@ -6,49 +6,91 @@ const prev = document.querySelector('#prev')
 const gallery = document.querySelector('.gallery')
 
 
+// not to delete next or previous images from the gallery
+const imagesArr = []
+for (let i = 0; i < img.length; i++) {
+    imagesArr.push(img[i].cloneNode(true))
+}
 
-img.forEach(item => {
-    item.addEventListener('click', (event) =>  {
-        event.stopPropagation() // iconlara da eklkemeyi unutma
+let currentImg; // to figure out the index of the current image 
 
-        gallery.style.opacity = '.2'
-       
-        // clone node 
-        let cloneEvent = event.target.cloneNode(true)
-        imgDOM.innerHTML = '' 
+img.forEach(img => {
+    img.addEventListener('click', () => {
+        event.stopPropagation()
+
+        gallery.style.opacity = '.2' // fot the slider effect
+        var cloneImg = event.target.cloneNode(true) // not to delete the image clicked
+
+        // appending image 
+        imgDOM.innerHTML = ''
+        imgDOM.appendChild(cloneImg)
+
+        // adding css properties 
         bigImg.style.display = 'flex'
-
-        cloneEvent.style.width = '100%'
-        cloneEvent.style.height = '100%'
-
-        imgDOM.append(cloneEvent)
-        
-        
+        cloneImg.style.width = '100%'
+        cloneImg.style.height = '100%'
         imgDOM.style.width = '50%'
         imgDOM.style.height = '50%'
-       
-        nextImg()
-        prevImg()
+
+        // 
+        currentImg = imgDOM.children.item(0)
     })
 })
 
-function nextImg() {
-   
+var index; // the index of the next/previous image 
+
+// next 
+const nextImg = () => {
     next.addEventListener('click', () => {
         event.stopPropagation()
-        console.log('next')
+
+        console.log()
+        index = imagesArr.findIndex(item => item.src === currentImg.src)
+
+        // adding css properties
+        imgDOM.innerHTML = ''
+
+        imagesArr[index + 1].style.width = '100%'
+        imagesArr[index + 1].style.height = '100%'
+        imgDOM.appendChild(imagesArr[index + 1])
+
+        currentImg = imagesArr[index + 1]
     })
 }
 
-function prevImg() {
+// prev
+const prevImg = () => {
     prev.addEventListener('click', () => {
         event.stopPropagation()
-        console.log('prev')
+
+        index = imagesArr.findIndex(item => item.src === currentImg.src)
+
+        // adding css properties
+        imgDOM.innerHTML = ''
+
+        imagesArr[index - 1].style.width = '100%'
+        imagesArr[index - 1].style.height = '100%'
+        imgDOM.appendChild(imagesArr[index - 1])
+
+        currentImg = imagesArr[index - 1]
     })
 }
+
+nextImg()
+prevImg()
 
 // to shut down the slider
 document.body.addEventListener('click', () => {
     bigImg.style.display = 'none'
     gallery.style.opacity = '1'
 })
+
+
+
+
+
+
+
+
+
+
